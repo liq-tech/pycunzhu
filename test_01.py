@@ -2,11 +2,9 @@
 # -*-coding:UTF-8 -*-
 # date: 20230710
 
-
-
+import re
+import datetime
 import os
-import time
-
 #1、发布版本：应用名称_预计发布时间_项目名称_版本号_release
 #例如：Dataex_20230622_shdx_1.0.0_release.tar.gz；
 #2、测试版本：应用名称_预计发布时间_项目名称_版本号_snopshot
@@ -19,43 +17,51 @@ dirname = os.path.dirname(__file__)
 basedir = os.path.abspath(dirname)
 os.chdir(basedir)
 
-now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-branch_time = time.strftime("%Y%m%d", time.localtime())
-tag_time = time.strftime("%Y%m%d", time.localtime())
-
-#定义分支信息
 dircode="D:\pycha\pycunzhu"
 os.chdir(dircode)
-
 git_url="git clone ssh://srd19302890819@code.srdcloud.cn:29418/dataProject/dataProject && scp -p -P 29418 srd19302890819@code.srdcloud.cn:hooks/commit-msg dataProject/.git/hooks/"
-git_project="zy"
-git_project1="ctzb"
-product_version="1.0.0"
-product_test="_snopshot"
-product_hotfix="_hotfix"
-git_specifications="branch_"+"项目启动时间"+"_"+"项目名称"+"_"+"版本号"+"_"+"分支标识"
-git_branch_zy_snopshot="branch_"+branch_time+"_"+git_project+"_"+product_version+product_test + "(自研项目分支)"
-git_branch_ctzb_snopshot="branch_"+branch_time+"_"+git_project1+"_"+product_version+product_test + "(集团总部项目分支）"
-git_branch_ctzb_hotfix="branch_"+branch_time+"_"+git_project1+"_"+product_version+product_hotfix + "(总部紧急分支)"
-git_branch_zy_hotfix="branch_"+branch_time+"_"+git_project+"_"+product_version+product_hotfix + "(自研紧急分支)"
+#specifications="branch_"+"项目启动时间"+"_"+"项目名称"+"_"+"版本号"+"_"+"分支标识"
+#定义分支信息
+#分支创建
+curtime = datetime.datetime.now().strftime("%Y%m%d")
+def auto_branch(project_name,version,identifi):
+    if project_name == 'zy' or project_name == 'ctzb' and identifi == 'snopshot' or identifi == 'hoxfix':
 
-#分支命名规范
+     if project_name and version and identifi:
+       branch_name = f'branch_{curtime}_{project_name}_{version}_{identifi}'
+    else:
+        branch_name = 'master'
+    return branch_name
+
+if __name__ == '__main__':
+    branch_name = auto_branch(project_name='ctzb',version='1.0.0',identifi='w')
+    print(branch_name)
+
+#标签命名
+def auto_tag(versions,project_names):
+    if project_names == 'zy' or project_names == 'ctsc':
+     if versions and project_names :
+        tag_name = f'{versions}-tag-{curtime}-{project_names}'
+    else:
+        tag_name = 'master'
+    return tag_name
+
+if __name__ == '__main__':
+    tag_name = auto_tag(versions='1.0.0',project_names='ctsc')
+    print(tag_name)
 
 
-#标签命名规范
-git_specifications1="版本号-"+"tag-"+"发布时间"+"-"+"项目名称"
-git_project2="zy"
-git_project3="ctsc"
-product_version1="1.0.0"
-git_tag_zy=product_version1+"-"+"tag-"+tag_time+"-"+git_project2
-git_tag_ctsc=product_version1+"-"+"tag-"+tag_time+"-"+git_project3
+#打包命名
+def auto_starlink(git_name,project_name2, versioni, identify):
 
-#打包命名规范
-git_specifications2="应用名称_"+"预计发布时间"+"_"+"项目名称"+"_"+"版本号_release"
-git_project4="ctsh"
-product_version2="1.0.0"
-product_web="_release.tar.gz"
-product_dafaflow="_snopshot.tar.gz"
-git_pack_ctsh_relese="starlink-web_"+branch_time+"_"+git_project4+"_"+product_version2+product_web
-git_pack_ctsh_snopshot="starlink-dafaflow_"+branch_time+"_"+git_project4+"_"+product_version2+product_dafaflow
+    if git_name and project_name2 and versioni and identify:
+        starlink_name = f'starlink-{git_name}_{curtime}_{project_name2}_{versioni}_{identify}'
+    else:
+        starlink_name = 'master'
+    return starlink_name
+
+
+if __name__ == '__main__':
+    starlink_name = auto_starlink(git_name='',project_name2='ctsh', versioni='1.0.0', identify='snopshot.tar.gz')
+    print(starlink_name)
 
