@@ -62,6 +62,6 @@ def auto_starlink(git_name,project_name2, versioni, identify):
 
 
 if __name__ == '__main__':
-    starlink_name = auto_starlink(git_name='',project_name2='ctsh', versioni='1.0.0', identify='snopshot.tar.gz')
+    starlink_name = auto_starlink(git_name='s',project_name2='ctsh', versioni='1.0.0', identify='snopshot.tar.gz')
     print(starlink_name)
 
