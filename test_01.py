@@ -59,19 +59,3 @@ product_dafaflow="_snopshot.tar.gz"
 git_pack_ctsh_relese="starlink-web_"+branch_time+"_"+git_project4+"_"+product_version2+product_web
 git_pack_ctsh_snopshot="starlink-dafaflow_"+branch_time+"_"+git_project4+"_"+product_version2+product_dafaflow
 
-
-
-
-def auto_branch(project_name,version,identifi):
-    curtime = time.time.now().strftime('%Y%m%d')
-    if project_name and version and identifi:
-        branch_name = f'branch_{curtime}_{project_name}_{version}_{identifi}'
-    else:
-        branch_name = 'master'
-        return branch_name
-
-
-if __name__ == '__main__':
-    branch_name = auto_branch(project_name='zy',version='1.0.0',identifi='hoxfix')
-    print(branch_name)
-
