@@ -40,11 +40,7 @@ git_branch_ctzb_hotfix="branch_"+branch_time+"_"+git_project1+"_"+product_versio
 git_branch_zy_hotfix="branch_"+branch_time+"_"+git_project+"_"+product_version+product_hotfix + "(自研紧急分支)"
 
 #分支命名规范
-print(git_specifications)
-print(git_branch_zy_snopshot)
-print(git_branch_ctzb_snopshot)
-print(git_branch_ctzb_hotfix)
-print(git_branch_zy_hotfix)
+
 
 #标签命名规范
 git_specifications1="版本号-"+"tag-"+"发布时间"+"-"+"项目名称"
@@ -53,9 +49,7 @@ git_project3="ctsc"
 product_version1="1.0.0"
 git_tag_zy=product_version1+"-"+"tag-"+tag_time+"-"+git_project2
 git_tag_ctsc=product_version1+"-"+"tag-"+tag_time+"-"+git_project3
-print(git_specifications1)
-print(git_tag_zy)
-print(git_tag_ctsc)
+
 #打包命名规范
 git_specifications2="应用名称_"+"预计发布时间"+"_"+"项目名称"+"_"+"版本号_release"
 git_project4="ctsh"
@@ -64,7 +58,20 @@ product_web="_release.tar.gz"
 product_dafaflow="_snopshot.tar.gz"
 git_pack_ctsh_relese="starlink-web_"+branch_time+"_"+git_project4+"_"+product_version2+product_web
 git_pack_ctsh_snopshot="starlink-dafaflow_"+branch_time+"_"+git_project4+"_"+product_version2+product_dafaflow
-print(git_specifications2)
-print(git_pack_ctsh_relese)
-print(git_pack_ctsh_snopshot)
+
+
+
+
+def auto_branch(project_name,version,identifi):
+    curtime = time.time.now().strftime('%Y%m%d')
+    if project_name and version and identifi:
+        branch_name = f'branch_{curtime}_{project_name}_{version}_{identifi}'
+    else:
+        branch_name = 'master'
+        return branch_name
+
+
+if __name__ == '__main__':
+    branch_name = auto_branch(project_name='zy',version='1.0.0',identifi='hoxfix')
+    print(branch_name)
 
