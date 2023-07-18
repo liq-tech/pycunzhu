@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#
 # -*-coding:UTF-8 -*-
-# date: 20230710
+
 
 import re
 import datetime
@@ -21,26 +21,25 @@ dircode="D:\pycha\pycunzhu"
 os.chdir(dircode)
 git_url="git clone ssh://srd19302890819@code.srdcloud.cn:29418/dataProject/dataProject && scp -p -P 29418 srd19302890819@code.srdcloud.cn:hooks/commit-msg dataProject/.git/hooks/"
 #specifications="branch_"+"项目启动时间"+"_"+"项目名称"+"_"+"版本号"+"_"+"分支标识"
-#定义分支信息
-#分支创建
+
+#分支命名
 curtime = datetime.datetime.now().strftime("%Y%m%d")
 def auto_branch(project_name,version,identifi):
-    if project_name == 'zy' or project_name == 'ctzb' and identifi == 'snopshot' or identifi == 'hoxfix':
-
-     if project_name and version and identifi:
-       branch_name = f'branch_{curtime}_{project_name}_{version}_{identifi}'
+    if project_name and version and identifi:
+       if identifi == 'snopshot' or identifi == 'hoxfix':
+         branch_name = f'branch_{curtime}_{project_name}_{version}_{identifi}'
     else:
-        branch_name = 'master'
+         branch_name = 'master'
     return branch_name
 
 if __name__ == '__main__':
-    branch_name = auto_branch(project_name='ctzb',version='1.0.0',identifi='w')
+    branch_name = auto_branch(project_name='w',version='1.0.0',identifi='hoxfix')
     print(branch_name)
 
 #标签命名
+
 def auto_tag(versions,project_names):
-    if project_names == 'zy' or project_names == 'ctsc':
-     if versions and project_names :
+    if versions and project_names:
         tag_name = f'{versions}-tag-{curtime}-{project_names}'
     else:
         tag_name = 'master'
