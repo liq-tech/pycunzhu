@@ -27,13 +27,13 @@ if __name__ == "__main__":
     project_version = sys.argv[2]
     branch_identifier = sys.argv[3]
     auto_branch_name = AutoBranchName(project_name, project_version, branch_identifier)
+    branch_command = f" {auto_branch_name}"
+    result = subprocess.run(branch_command, shell=True, text=True).returncode
     if auto_branch_name.generate_branch_name():
         auto_branch_name.output_branch_name()
     else:
         print("分支名称格式错误，请检查后重新输入")
-    branch_command = f" {auto_branch_name}"
 
-    result = subprocess.run(branch_command, shell=True, text=True).returncode
     if result == 0:
        print(f"分支 {auto_branch_name} 创建成功！")
     else:
