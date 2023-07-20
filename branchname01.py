@@ -31,10 +31,10 @@ if __name__ == "__main__":
         auto_branch_name.output_branch_name()
     else:
         print("分支名称格式错误，请检查后重新输入")
-branch_command = f"git branch {auto_branch_name}"
+    branch_command = f"git branch {auto_branch_name}"
 
-result = subprocess.run(branch_command, shell=True, text=True).returncode
-if result == 0:
-   print(f"分支 {auto_branch_name} 创建成功！")
-else:
-   print(f"分支 {auto_branch_name} 创建失败，返回{result}")
+    result = subprocess.run(branch_command, shell=True, text=True).returncode
+    if result == 0:
+       print(f"分支 {auto_branch_name} 创建成功！")
+    else:
+       print(f"分支 {auto_branch_name} 创建失败，返回{result}")
